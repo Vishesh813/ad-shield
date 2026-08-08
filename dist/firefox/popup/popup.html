@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AdShield</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="hd">
+      <div class="hd-left">
+        <svg class="mk" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2l11 4v9c0 7.6-4.7 12.4-11 15C9.7 27.4 5 22.6 5 15V6l11-4z" fill="#0f766e"/>
+          <path d="M11.5 15.8l3 3 6.2-6.4" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="nm">
+          <h1>AdShield</h1>
+          <span class="v">v1.1 · network level</span>
+        </div>
+      </div>
+      <button id="master" class="pill" title="Master switch">
+        <span class="dot"></span><span class="pcap" id="masterLbl">ON</span>
+      </button>
+    </header>
+
+    <section class="sitebar" id="sitebar">
+      <div class="site-ic" id="siteIc">•</div>
+      <div class="site-tx">
+        <b id="siteName">—</b>
+        <span id="siteStatus">Protected by network rules</span>
+      </div>
+      <button id="siteToggle" class="mini">Suspend</button>
+    </section>
+
+    <section class="kpis">
+      <div class="kpi">
+        <span class="k-ic" style="--ic:#2dd4bf">AD</span>
+        <b id="kAds">0</b><i>Ads</i>
+      </div>
+      <div class="kpi">
+        <span class="k-ic" style="--ic:#818cf8">TR</span>
+        <b id="kTrackers">0</b><i>Trackers</i>
+      </div>
+      <div class="kpi">
+        <span class="k-ic" style="--ic:#fbbf24">PU</span>
+        <b id="kPopups">0</b><i>Popups</i>
+      </div>
+      <div class="kpi">
+        <span class="k-ic" style="--ic:#94a3b8">RE</span>
+        <b id="kRequests">0</b><i>Req. cut</i>
+      </div>
+    </section>
+
+    <section class="trend">
+      <div class="trend-head">
+        <b>Last 7 days</b>
+        <span id="trendTotal">0 blocked</span>
+      </div>
+      <div class="bars" id="bars" aria-hidden="true"></div>
+    </section>
+
+    <section class="controls">
+      <div class="row">
+        <div class="rl"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><div><b>Ads &amp; native</b><span>Banners, video, promos</span></div></div>
+        <label class="switch"><input id="blockAds" type="checkbox" /><span></span></label>
+      </div>
+      <div class="row">
+        <div class="rl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><div><b>Trackers</b><span>Analytics &amp; data collectors</span></div></div>
+        <label class="switch"><input id="blockTrackers" type="checkbox" /><span></span></label>
+      </div>
+      <div class="row">
+        <div class="rl"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M6 4h12a2 2 0 012 2v7a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><div><b>Popup blocker</b><span>New tabs &amp; redirect hijacks</span></div></div>
+        <label class="switch"><input id="blockPopups" type="checkbox" /><span></span></label>
+      </div>
+      <div class="row">
+        <div class="rl"><svg viewBox="0 0 24 24"><path d="M12 3a8 8 0 018 8c0 5-3 8.5-8 10-5-1.5-8-5-8-10a8 8 0 018-8z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Stealth mode</b><span>Keep layout, hide silently</span></div></div>
+        <label class="switch"><input id="stealthMode" type="checkbox" /><span></span></label>
+      </div>
+      <div class="row">
+        <div class="rl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg><div><b>Calm YouTube ads</b><span>No fast-forward — skip silently</span></div></div>
+        <label class="switch"><input id="ytCalm" type="checkbox" /><span></span></label>
+      </div>
+    </section>
+
+    <section class="sites" id="sitesCard">
+      <div class="trend-head"><b>Allowed sites</b><span id="sitesCount">0 sites</span></div>
+      <div id="sitesList" class="chips"></div>
+      <p class="empty" id="sitesEmpty">No sites are allowed — protection is on everywhere.</p>
+    </section>
+
+    <footer class="ft">
+      <button id="openAnalytics" class="analytics">Open full analytics</button>
+      <div class="side-notes">
+        <span id="sn">Live protection</span>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

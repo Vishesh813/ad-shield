@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AdShield Analytics</title>
+  <link rel="stylesheet" href="analytics.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <div class="brand">
+        <svg class="mk" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 2l11 4v9c0 7.6-4.7 12.4-11 15C9.7 27.4 5 22.6 5 15V6l11-4z" fill="#0f766e"/>
+          <path d="M11.5 15.8l3 3 6.2-6.4" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h1>AdShield Analytics</h1>
+          <p>Blocking intelligence across every tab</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div class="seg" id="rangeSeg">
+          <button data-days="7">7 days</button>
+          <button data-days="30" class="on">30 days</button>
+        </div>
+        <button id="clearBtn" class="ghost">Clear data</button>
+      </div>
+    </header>
+
+    <section class="kpis">
+      <div class="kpi"><span>Blocked requests</span><b id="kTotal">0</b><i id="kAvg">0/day</i></div>
+      <div class="kpi"><span>Ads hidden</span><b id="kAds">0</b><i>native + display</i></div>
+      <div class="kpi"><span>Trackers cut</span><b id="kTrackers">0</b><i>analytics &amp; pixels</i></div>
+      <div class="kpi"><span>Popups stopped</span><b id="kPopups">0</b><i>tabs &amp; redirects</i></div>
+      <div class="kpi"><span>Sites protected</span><b id="kSites">0</b><i>distinct domains</i></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><b>Trend — blocked per day</b><span class="hint" id="trendHint">scroll-free view</span></div>
+      <div class="chart" id="chart"></div>
+      <div class="legend" id="legend"></div>
+    </section>
+
+    <section class="split">
+      <div class="card">
+        <div class="card-head"><b>Category mix</b><span class="hint">selected range</span></div>
+        <div class="mix" id="mix"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><b>Top blocked hosts</b><span class="hint" id="hostsHint">network layer</span></div>
+        <div class="hosts" id="hosts"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><b>Daily breakdown</b><span class="hint">last 30 days</span></div>
+      <div class="daily" id="daily"></div>
+    </section>
+
+    <footer class="foot">
+      All counters are local to this browser. Data is kept for 30 days, then auto-pruned.
+    </footer>
+  </div>
+  <script type="module" src="analytics.js"></script>
+</body>
+</html>

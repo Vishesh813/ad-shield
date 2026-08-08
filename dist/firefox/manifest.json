@@ -1,0 +1,103 @@
+{
+  "manifest_version": 3,
+  "name": "AdShield — Ad, Tracker & Popup Blocker (Firefox)",
+  "version": "1.2.0",
+  "description": "Blocks ads, trackers and popups at the network level before they load, plus stealth cosmetic hiding, popup protection and a full blocking analytics dashboard.",
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "storage",
+    "alarms",
+    "webRequest",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ads",
+        "enabled": true,
+        "path": "lib/rules-ads.json"
+      },
+      {
+        "id": "trackers",
+        "enabled": true,
+        "path": "lib/rules-trackers.json"
+      },
+      {
+        "id": "popups",
+        "enabled": true,
+        "path": "lib/rules-popups.json"
+      }
+    ]
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "content/youtube.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "options_ui": {
+    "page": "options/analytics.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "lib/stub-adsbygoogle.js",
+        "lib/popup-domains.json",
+        "content/popup-payload.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "action": {
+    "default_title": "AdShield",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "adshield@shield.local",
+      "strict_min_version": "124.0"
+    }
+  }
+}
