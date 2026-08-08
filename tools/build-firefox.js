@@ -16,7 +16,7 @@ function copyDir(src, dest, exclusions = []) {
 }
 
 fs.rmSync(dist, { recursive: true, force: true });
-copyDir(root, dist, ["node_modules", "dist", "tools", "tests", "adshield.zip", "adshield-firefox.zip", ".git"]);
+copyDir(root, dist, ["node_modules", "dist", "tools", "tests", "_metadata", "adshield.zip", "adshield-firefox.zip", ".git"]);
 
 const manifestPath = path.join(dist, "manifest.json");
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
@@ -29,6 +29,16 @@ manifest.browser_specific_settings = {
     strict_min_version: "124.0"
   }
 };
+const background = manifest.background;
+if (background && background.service_worker) {
+  manifest.background = { scripts: [manifest.background.service_worker] };
+}
+if (Array.isArray(manifest.permissions)) {
+  manifest.permissions = manifest.permissions.filter((p) => p !== "declarativeNetRequestWithHostAccess");
+}
+for (const cs of manifest.content_scripts || []) {
+  delete cs.match_origin_as_fallback;
+}
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
 

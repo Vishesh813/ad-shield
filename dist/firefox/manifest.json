@@ -5,7 +5,6 @@
   "description": "Blocks ads, trackers and popups at the network level before they load, plus stealth cosmetic hiding, popup protection and a full blocking analytics dashboard.",
   "permissions": [
     "declarativeNetRequest",
-    "declarativeNetRequestWithHostAccess",
     "storage",
     "alarms",
     "webRequest",
@@ -35,8 +34,9 @@
     ]
   },
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
+    "scripts": [
+      "background.js"
+    ]
   },
   "content_scripts": [
     {
@@ -48,8 +48,7 @@
       ],
       "run_at": "document_start",
       "all_frames": true,
-      "match_about_blank": true,
-      "match_origin_as_fallback": true
+      "match_about_blank": true
     },
     {
       "matches": [
